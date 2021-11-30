@@ -32,6 +32,17 @@ export const contentData = [
         city : "Gensokyo",
         state : "OH",
         zipCode : "12505"
+    },
+    {
+        firstName : "Mokou",
+        lastName : "Fujiwara no",
+        startDate : "10/01/2020",
+        department : "Engineering",
+        dateOfBirth : "05/12/785",
+        street : "Bamboo forest of the lost",
+        city : "Gensokyo",
+        state : "NC",
+        zipCode : "90657"
     }
 ]
 
