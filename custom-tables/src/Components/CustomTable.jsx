@@ -30,16 +30,62 @@ function CustomTable({data, columns}) {
     console.log('Type of data', typeOfData(data[0][sortingData]))
 
     function sortData(dataset, sortingColumn, direction) {
-            dataset.sort((a,b) => {
-                if (typeOfData(dataset[0][sortingColumn]) === 'number') {
-                    if (direction === 'asc') {
-                        return parseInt(a[sortingColumn]) - parseInt(b[sortingColumn])
-                    }
-                    if (direction === 'desc') {
-                        return parseInt(b[sortingColumn]) - parseInt(a[sortingColumn])
-                    }
+        const sortType = typeOfData(dataset[0][sortingColumn])
+
+        dataset.sort((a,b) => {
+            if (sortType === 'number') {
+                if (direction === 'asc') {
+                    return parseInt(a[sortingColumn]) - parseInt(b[sortingColumn])
                 }
-            })
+                if (direction === 'desc') {
+                    return parseInt(b[sortingColumn]) - parseInt(a[sortingColumn])
+                }
+            }
+
+            if (sortType === 'text') {
+                if (direction === 'asc') {
+                    if (a[sortingColumn].toLowerCase() < b[sortingColumn].toLowerCase()) {
+                        return -1
+                    }
+                    if (a[sortingColumn].toLowerCase() > b[sortingColumn].toLowerCase()) {
+                        return 1
+                    }
+                    return 0
+                }
+                if (direction === 'desc') {
+                    if (a[sortingColumn].toLowerCase() > b[sortingColumn].toLowerCase()) {
+                        return -1
+                    }
+                    if (a[sortingColumn].toLowerCase() < b[sortingColumn].toLowerCase()) {
+                        return 1
+                    }
+                    return 0
+                }
+            }
+
+            if (sortType === 'date') {
+                if (direction === 'asc') {
+                    if (new Date(a[sortingColumn]) < new Date(b[sortingColumn])) {
+                        return -1
+                    }
+                    if (new Date(a[sortingColumn]) > new Date(b[sortingColumn])) {
+                        return 1
+                    }
+                    return 0
+                }
+
+                if (direction === 'desc') {
+                    if (new Date(a[sortingColumn]) > new Date(b[sortingColumn])) {
+                        return -1
+                    }
+                    if (new Date(a[sortingColumn]) < new Date(b[sortingColumn])) {
+                        return 1
+                    }
+                    return 0
+                }
+
+            }
+        })
         return dataset
     }
 
