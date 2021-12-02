@@ -4,6 +4,41 @@ import HeaderElement from "./HeaderElement";
 import DataRow from "./DataRow";
 
 function CustomTable({data, columns}) {
+
+    const [entriesDisplayed, setEntriesDisplayed] = useState(5)
+    const [currentPage, setCurrentPage] = useState(1)
+
+    function onSelectEntriesDisplayed(e) {
+        setEntriesDisplayed(e.target.value)
+    }
+
+    if (!data) return (
+        <>
+            <div className="main-table-wrapper">
+                <div className="options-wrapper">
+                    <div className="page-length-wrapper">
+                        <select id="page-length" value={entriesDisplayed} onChange={onSelectEntriesDisplayed}>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                        <label htmlFor="page-length"> entries per page</label>
+                    </div>
+                    <div className="search-wrapper">
+                        <label>Search : </label>
+                        <input type="text" />
+                    </div>
+                </div>
+                <table className="empty-table">
+                    No data available
+                </table>
+            </div>
+        </>
+    )
+
+
     const firstColLabel = columns[0].data
 
     const [currentSorting, setCurrentSorting] = useState(`${firstColLabel} asc`)
@@ -91,26 +126,79 @@ function CustomTable({data, columns}) {
 
     sortData(data, sortingData, sortDirection)
 
-    return (
-        <table className="main-table">
-            <thead className="table-header">
-                <tr>
-                    {columns.map(currentCol => (
-                        <HeaderElement
-                            key={currentCol.data}
-                            title={currentCol.title} data={currentCol.data}
-                            currentSorting={currentSorting} setCurrentSorting={setCurrentSorting}
-                        />
-                    ))}
-                </tr>
-            </thead>
+    function onClickingNext() {
+        setCurrentPage(currentPage + 1)
+    }
 
-            <tbody>
-            {data.map(currentData => (
-                <DataRow columns={columns} subData={currentData} key={currentData[firstColLabel]}/>
-            ))}
-            </tbody>
-        </table>
+    function onClickingPrevious() {
+        setCurrentPage(currentPage - 1)
+    }
+
+    const lastEntryIndex = data.length - 1
+    const lastEntryDisplayedIndex = Math.min((currentPage)*entriesDisplayed, lastEntryIndex + 1)
+    const firstEntryDisplayedIndex = (currentPage-1)*entriesDisplayed
+    const lastPageNumber = Math.floor(data.length/entriesDisplayed) + 1
+    const subData = data.slice(firstEntryDisplayedIndex, lastEntryDisplayedIndex)
+    const pagesNumberArray = [...Array(lastPageNumber).keys()].splice(1)
+
+    const isPreviousDisabled = firstEntryDisplayedIndex === 0
+    const isNextDisabled = lastEntryDisplayedIndex === lastEntryIndex + 1
+
+
+    return (
+        <>
+            <div className="main-table-wrapper">
+                <div className="options-wrapper">
+                    <div className="page-length-wrapper">
+                        <select id="page-length" value={entriesDisplayed} onChange={onSelectEntriesDisplayed}>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                        <label htmlFor="page-length"> entries per page</label>
+                    </div>
+                    <div className="search-wrapper">
+                        <label>Search : </label>
+                        <input type="text" />
+                    </div>
+                </div>
+                <table>
+                    <thead className="table-header">
+                    <tr>
+                        {columns.map(currentCol => (
+                            <HeaderElement
+                                key={currentCol.data}
+                                title={currentCol.title} data={currentCol.data}
+                                currentSorting={currentSorting} setCurrentSorting={setCurrentSorting}
+                            />
+                        ))}
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {subData.map(currentData => (
+                        <DataRow columns={columns} subData={currentData}
+                                 key={`${currentData[firstColLabel]} ${currentData[columns[1].data]}`}/>
+                    ))}
+                    </tbody>
+                </table>
+                <div>
+                    <div>entries {firstEntryDisplayedIndex + 1}-{lastEntryDisplayedIndex} of {lastEntryIndex + 1}</div>
+                    <div>
+                        <button disabled={isPreviousDisabled} onClick={onClickingPrevious}>Previous</button>
+                        {pagesNumberArray.map(pageNumber => (
+                            <button
+                                key={pageNumber}
+                                onClick={() => setCurrentPage(pageNumber)}
+                            >{pageNumber}</button>
+                        ))}
+                        <button disabled={isNextDisabled} onClick={onClickingNext}>Next</button>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 

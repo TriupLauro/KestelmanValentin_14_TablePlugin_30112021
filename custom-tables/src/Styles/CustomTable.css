@@ -1,4 +1,19 @@
-.main-table {
+.main-table-wrapper {
     width : fit-content;
     margin: auto;
+}
+
+.options-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 3rem;
+    line-height: 3rem;
+}
+
+.table-header {
+    cursor: pointer;
+}
+
+.empty-table {
+    margin : auto;
 }
