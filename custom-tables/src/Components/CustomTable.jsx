@@ -13,10 +13,26 @@ function CustomTable({data, columns}) {
         setCurrentPage(1)
     }
 
+    const [searchKeyword, setSearchKeyword] = useState('')
+
+    function onChangeSearch(e) {
+        setSearchKeyword(e.target.value)
+    }
+
+    function filterData(data,keyword,columnsArray) {
+        return data.filter(row => {
+            for (let currentColumn of columnsArray) {
+                if (row[currentColumn.data].toString().toLowerCase().includes(keyword.toLowerCase())) return true
+            }
+            return false
+        })
+    }
+
+    const memoizedFilter = useMemo(() => filterData(data,searchKeyword,columns)
+    ,[searchKeyword,data,columns])
+
     const firstColLabel = columns[0]?.data
-
     const [currentSorting, setCurrentSorting] = useState(`${firstColLabel} asc`)
-
     const [sortingData, sortDirection] = currentSorting.split(' ')
 
     function typeOfData(subData) {
@@ -96,8 +112,8 @@ function CustomTable({data, columns}) {
         return dataset
     }
 
-    const memoizedSort = useMemo(() => data ? sortData(data, sortingData, sortDirection) : [],
-        [data, sortingData,sortDirection])
+    const memoizedSort = useMemo(() => memoizedFilter ? sortData(memoizedFilter, sortingData, sortDirection) : [],
+        [memoizedFilter, sortingData,sortDirection])
 
     function onClickingNext() {
         setCurrentPage(currentPage + 1)
@@ -107,12 +123,12 @@ function CustomTable({data, columns}) {
         setCurrentPage(currentPage - 1)
     }
 
-    const lastEntryIndex = data?.length - 1
+    const lastEntryIndex = memoizedFilter?.length - 1
     const lastEntryDisplayedIndex = Math.min((currentPage)*entriesDisplayed, lastEntryIndex + 1)
     const firstEntryDisplayedIndex = (currentPage-1)*entriesDisplayed
-    const lastPageNumber = Math.floor(data?.length/entriesDisplayed) + 1
+    const lastPageNumber = Math.floor(memoizedFilter?.length/entriesDisplayed) + 1
     const subData = memoizedSort.slice(firstEntryDisplayedIndex, lastEntryDisplayedIndex)
-    const pagesNumberArray = data ? [...Array(lastPageNumber).keys()].splice(1) : []
+    const pagesNumberArray = memoizedFilter ? [...Array(lastPageNumber).keys()].splice(1) : []
 
     const isPreviousDisabled = firstEntryDisplayedIndex === 0
     const isNextDisabled = lastEntryDisplayedIndex === lastEntryIndex + 1
@@ -159,7 +175,7 @@ function CustomTable({data, columns}) {
                     </div>
                     <div className="search-wrapper">
                         <label>Search : </label>
-                        <input type="text" />
+                        <input type="text" value={searchKeyword} onChange={onChangeSearch}/>
                     </div>
                 </div>
                 <table>
