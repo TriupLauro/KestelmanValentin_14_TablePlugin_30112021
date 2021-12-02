@@ -1,5 +1,6 @@
 import React from "react";
 import "../Styles/HeaderElement.css"
+import {FaSort, FaSortDown, FaSortUp} from "react-icons/fa";
 
 //Sorting can be false, "asc" or "desc"
 function HeaderElement({title, data, currentSorting,setCurrentSorting}) {
@@ -8,7 +9,7 @@ function HeaderElement({title, data, currentSorting,setCurrentSorting}) {
         return (
             <th className="header-element"
                 onClick={() => setCurrentSorting(`${data} desc`)}>
-                {title} <i className="fas fa-sort-up"></i>
+                {title} <FaSortUp />
             </th>
         )
     }
@@ -17,7 +18,7 @@ function HeaderElement({title, data, currentSorting,setCurrentSorting}) {
         return (
             <th className="header-element"
                 onClick={() => setCurrentSorting(`${data} asc`)}>
-                {title} <i className="fas fa-sort-down"></i>
+                {title} <FaSortDown />
             </th>
         )
     }
@@ -25,7 +26,7 @@ function HeaderElement({title, data, currentSorting,setCurrentSorting}) {
     return (
         <th className="header-element"
             onClick={() => setCurrentSorting(`${data} asc`)}>
-            {title} <i className="fas fa-sort"></i>
+            {title} <FaSort className="fa-sort"/>
         </th>
     )
 }
