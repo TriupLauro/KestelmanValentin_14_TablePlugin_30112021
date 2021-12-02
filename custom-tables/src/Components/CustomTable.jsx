@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import "../Styles/CustomTable.css"
 import HeaderElement from "./HeaderElement";
 import DataRow from "./DataRow";
@@ -10,6 +10,7 @@ function CustomTable({data, columns}) {
 
     function onSelectEntriesDisplayed(e) {
         setEntriesDisplayed(e.target.value)
+        setCurrentPage(1)
     }
 
     if (!data) return (
@@ -124,7 +125,7 @@ function CustomTable({data, columns}) {
         return dataset
     }
 
-    sortData(data, sortingData, sortDirection)
+    const memoizedSort = useMemo(() => sortData(data, sortingData, sortDirection), [data, sortingData,sortDirection])
 
     function onClickingNext() {
         setCurrentPage(currentPage + 1)
@@ -138,7 +139,7 @@ function CustomTable({data, columns}) {
     const lastEntryDisplayedIndex = Math.min((currentPage)*entriesDisplayed, lastEntryIndex + 1)
     const firstEntryDisplayedIndex = (currentPage-1)*entriesDisplayed
     const lastPageNumber = Math.floor(data.length/entriesDisplayed) + 1
-    const subData = data.slice(firstEntryDisplayedIndex, lastEntryDisplayedIndex)
+    const subData = memoizedSort.slice(firstEntryDisplayedIndex, lastEntryDisplayedIndex)
     const pagesNumberArray = [...Array(lastPageNumber).keys()].splice(1)
 
     const isPreviousDisabled = firstEntryDisplayedIndex === 0
