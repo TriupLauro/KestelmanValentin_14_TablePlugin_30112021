@@ -13,34 +13,7 @@ function CustomTable({data, columns}) {
         setCurrentPage(1)
     }
 
-    if (!data) return (
-        <>
-            <div className="main-table-wrapper">
-                <div className="options-wrapper">
-                    <div className="page-length-wrapper">
-                        <select id="page-length" value={entriesDisplayed} onChange={onSelectEntriesDisplayed}>
-                            <option>5</option>
-                            <option>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </select>
-                        <label htmlFor="page-length"> entries per page</label>
-                    </div>
-                    <div className="search-wrapper">
-                        <label>Search : </label>
-                        <input type="text" />
-                    </div>
-                </div>
-                <table className="empty-table">
-                    No data available
-                </table>
-            </div>
-        </>
-    )
-
-
-    const firstColLabel = columns[0].data
+    const firstColLabel = columns[0]?.data
 
     const [currentSorting, setCurrentSorting] = useState(`${firstColLabel} asc`)
 
@@ -62,8 +35,6 @@ function CustomTable({data, columns}) {
             break
         }
     }*/
-
-    console.log('Type of data', typeOfData(data[0][sortingData]))
 
     function sortData(dataset, sortingColumn, direction) {
         const sortType = typeOfData(dataset[0][sortingColumn])
@@ -125,7 +96,8 @@ function CustomTable({data, columns}) {
         return dataset
     }
 
-    const memoizedSort = useMemo(() => sortData(data, sortingData, sortDirection), [data, sortingData,sortDirection])
+    const memoizedSort = useMemo(() => data ? sortData(data, sortingData, sortDirection) : [],
+        [data, sortingData,sortDirection])
 
     function onClickingNext() {
         setCurrentPage(currentPage + 1)
@@ -135,16 +107,41 @@ function CustomTable({data, columns}) {
         setCurrentPage(currentPage - 1)
     }
 
-    const lastEntryIndex = data.length - 1
+    const lastEntryIndex = data?.length - 1
     const lastEntryDisplayedIndex = Math.min((currentPage)*entriesDisplayed, lastEntryIndex + 1)
     const firstEntryDisplayedIndex = (currentPage-1)*entriesDisplayed
-    const lastPageNumber = Math.floor(data.length/entriesDisplayed) + 1
+    const lastPageNumber = Math.floor(data?.length/entriesDisplayed) + 1
     const subData = memoizedSort.slice(firstEntryDisplayedIndex, lastEntryDisplayedIndex)
-    const pagesNumberArray = [...Array(lastPageNumber).keys()].splice(1)
+    const pagesNumberArray = data ? [...Array(lastPageNumber).keys()].splice(1) : []
 
     const isPreviousDisabled = firstEntryDisplayedIndex === 0
     const isNextDisabled = lastEntryDisplayedIndex === lastEntryIndex + 1
 
+    if (!data) return (
+        <>
+            <div className="main-table-wrapper">
+                <div className="options-wrapper">
+                    <div className="page-length-wrapper">
+                        <select id="page-length" value={entriesDisplayed} onChange={onSelectEntriesDisplayed}>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>100</option>
+                        </select>
+                        <label htmlFor="page-length"> entries per page</label>
+                    </div>
+                    <div className="search-wrapper">
+                        <label>Search : </label>
+                        <input type="text" />
+                    </div>
+                </div>
+                <div className="empty-table">
+                    No data available
+                </div>
+            </div>
+        </>
+    )
 
     return (
         <>
