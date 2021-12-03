@@ -1,3 +1,11 @@
+/**
+ * How the columns array should be formatted
+ * The title value can be anything and is only used as the name of the header
+ * The data value is the key of the data in the data array
+ * In order to display the corresponding data, there should be a columnsLabel element for each of
+ * the keys of every data element
+ * @type {{data: string, title: string}[]}
+ */
 export const columnsLabels = [
     { title: 'First Name', data: 'firstName' },
     { title: 'Last Name', data: 'lastName' },
@@ -10,6 +18,11 @@ export const columnsLabels = [
     { title: 'Zip Code', data: 'zipCode' }
 ]
 
+/**
+ * The data to be displayed in the table. Every element should have the same keys.
+ * Each key should be referenced as the data value of one column element (see columnsLabel)
+ * @type Object[]
+ */
 export const contentData = [
     {
         firstName : "Marisa",
@@ -47,6 +60,21 @@ export const contentData = [
 ]
 
 //Data below generated at : https://extendsclass.com/json-generator.html
+/*
+repeat(50,{
+  "firstName": firstname(),
+  "lastName": lastname(),
+  "startDate" : date("m/d/Y","2010","2021" ),
+  "department" : choice("Sales","Marketing",
+                        "Engineering","Human Resources",
+                       "Legal"),
+  "dateOfBirth" : date("m/d/Y","1950","2005"),
+  "street" : "",
+  "city" : city(),
+  "state" : countryCode(),
+  "zipCode" : random(10000,99999)
+})
+ */
 export const generatedData = [
     {
         "firstName": "Roberta",
