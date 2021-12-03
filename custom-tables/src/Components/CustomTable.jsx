@@ -221,7 +221,7 @@ function CustomTable({data, columns}) {
                         <input type="text" value={searchKeyword} onChange={onChangeSearch}/>
                     </div>
                 </div>
-                <table>
+                <table className="main-table">
                     <thead className="table-header">
                     <tr>
                         {columns.map(currentCol => (
@@ -234,7 +234,7 @@ function CustomTable({data, columns}) {
                     </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody className="table-body">
                     {subData.length === 0 ?
                         <tr><td colSpan={columns.length} className="empty-table">No data available</td></tr>
                         :
@@ -244,12 +244,12 @@ function CustomTable({data, columns}) {
                     ))}
                     </tbody>
                 </table>
-                <div>
+                <div className="options-wrapper">
                     <div>entries {firstEntryDisplayedIndex + 1}-{lastEntryDisplayedIndex} of {lastEntryIndex + 1}</div>
-                    <div>
+                    <div className="page-button-wrapper">
                         <button disabled={isPreviousDisabled} onClick={onClickingPrevious}>Previous</button>
                         {pagesNumberArray.map(pageNumber => (
-                            <button
+                            <button className={`page-number-button ${pageNumber === currentPage && 'active-button'}`}
                                 key={pageNumber}
                                 onClick={() => setCurrentPage(pageNumber)}
                             >{pageNumber}</button>

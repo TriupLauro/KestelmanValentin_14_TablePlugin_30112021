@@ -3,6 +3,10 @@
     margin: auto;
 }
 
+.main-table {
+    border-collapse: collapse;
+}
+
 .options-wrapper {
     display: flex;
     justify-content: space-between;
@@ -16,4 +20,47 @@
 
 .empty-table {
     text-align: center;
+}
+
+.table-body {
+    border-top : 1px solid black;
+    border-bottom : 1px solid black;
+}
+
+.table-body tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+.table-body tr td {
+    padding: 0.5rem;
+}
+
+.page-button-wrapper button {
+    padding: 0.5rem;
+    border-radius: 0;
+}
+
+.page-number-button {
+    border: none;
+    background-color: white;
+}
+
+.page-number-button.active-button {
+    background-color: lightgray;
+}
+
+.page-number-button:hover {
+    background-color: darkgrey;
+    border-top : 1px solid lightgray;
+    border-left : 1px solid lightgray;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.page-number-button:active {
+    background-color: darkgrey;
+    border-top : 1px solid gray;
+    border-left : 1px solid gray;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
 }
