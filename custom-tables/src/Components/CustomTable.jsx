@@ -187,7 +187,11 @@ function CustomTable({data, columns}) {
     const firstEntryDisplayedIndex = (currentPage-1)*entriesDisplayed
     const lastPageNumber = Math.floor(memoizedSort?.length/entriesDisplayed) + 1
     const subData = memoizedSort.slice(firstEntryDisplayedIndex, lastEntryDisplayedIndex)
-    const pagesNumberArray = memoizedSort ? [...Array(lastPageNumber).keys()].splice(1) : []
+
+    let firstNumberArray = currentPage -5 <= 1 ? 1 : currentPage - 5
+    const lastNumberArray = firstNumberArray + 10 <= lastPageNumber ? firstNumberArray + 10 : lastPageNumber
+    firstNumberArray = lastNumberArray - 10 <= 1 ? 1 : lastNumberArray - 10
+    const pagesNumberArray = memoizedSort ? [...Array(lastNumberArray).keys()].splice(firstNumberArray) : []
 
     const isPreviousDisabled = firstEntryDisplayedIndex === 0
     const isNextDisabled = lastEntryDisplayedIndex === lastEntryIndex + 1
