@@ -4,18 +4,18 @@
  * The data value is the key of the data in the data array
  * In order to display the corresponding data, there should be a columnsLabel element for each of
  * the keys of every data element
- * @type {{data: string, title: string}[]}
+ * @type {{label: string, title: string}[]}
  */
 export const columnsLabels = [
-    { title: 'First Name', data: 'firstName' },
-    { title: 'Last Name', data: 'lastName' },
-    { title: 'Start Date', data: 'startDate' },
-    { title: 'Department', data: 'department' },
-    { title: 'Date of Birth', data: 'dateOfBirth' },
-    { title: 'Street', data: 'street' },
-    { title: 'City', data: 'city' },
-    { title: 'State', data: 'state' },
-    { title: 'Zip Code', data: 'zipCode' }
+    { title: 'First Name', label: 'firstName' },
+    { title: 'Last Name', label: 'lastName' },
+    { title: 'Start Date', label: 'startDate' },
+    { title: 'Department', label: 'department' },
+    { title: 'Date of Birth', label: 'dateOfBirth' },
+    { title: 'Street', label: 'street' },
+    { title: 'City', label: 'city' },
+    { title: 'State', label: 'state' },
+    { title: 'Zip Code', label: 'zipCode' }
 ]
 
 /**

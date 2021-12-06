@@ -1,7 +1,7 @@
 export const bigColumns = [
-    {title : "First Name", data : "firstName"},
-    {title: "Last Name", data : "lastName"},
-    {title : "Number", data : "number"}
+    {title : "First Name", label : "firstName"},
+    {title: "Last Name", label : "lastName"},
+    {title : "Number", label : "number"}
 ]
 
 export const bigRandomNumber = [

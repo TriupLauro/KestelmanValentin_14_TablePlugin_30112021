@@ -14,7 +14,7 @@ function DataRow({columns,subData}) {
     return(
         <tr>
             {columns.map((currentCol) => (
-                <td key={subData[currentCol.data]}>{subData[currentCol.data]}</td>
+                <td key={subData[currentCol.label]}>{subData[currentCol.label]}</td>
             ))}
         </tr>
     )

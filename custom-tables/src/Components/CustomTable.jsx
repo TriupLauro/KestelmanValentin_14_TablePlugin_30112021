@@ -8,10 +8,10 @@ import DataRow from "./DataRow";
  * Given the two props described below, makes a table
  * with sort, filter and pagination functionalities.
  * @component
- * @param  {Object[]} columns The array of columns. Each column must be an object with two keys
- * @param {string} columns[].title The title of the column to be displayed in the header
- * @param {string} columns[].data The key of the data corresponding to the title
- * @param {Object[]} data The data to be displayed. The key of each object must correspond to the value of data
+ * @param {Object[]} columns The columns props, specify the header and the key of the data
+ * @param {String} columns.title The title of the column to be displayed in the header
+ * @param {String} columns.label The key of the data in the data object corresponding to the title
+ * @param {Object[]} data The data to be displayed. The key of each object must correspond to the value of label
  * in the columns prop
  * @returns {JSX.Element} The table of data, or a message if no data is given
  * @constructor
@@ -55,7 +55,7 @@ function CustomTable({data, columns}) {
     function filterData(data,keyword,columnsArray) {
         return data.filter(row => {
             for (let currentColumn of columnsArray) {
-                if (row[currentColumn.data].toString().toLowerCase().includes(keyword.toLowerCase())) return true
+                if (row[currentColumn.label].toString().toLowerCase().includes(keyword.toLowerCase())) return true
             }
             return false
         })
@@ -68,7 +68,7 @@ function CustomTable({data, columns}) {
     const memoizedFilter = useMemo(() => filterData(data,searchKeyword,columns)
     ,[searchKeyword,data,columns])
 
-    const firstColLabel = columns[0]?.data
+    const firstColLabel = columns[0]?.label
     const [currentSorting, setCurrentSorting] = useState(`${firstColLabel} asc`)
     const [sortingData, sortDirection] = currentSorting.split(' ')
 
@@ -230,8 +230,8 @@ function CustomTable({data, columns}) {
                     <tr>
                         {columns.map(currentCol => (
                             <HeaderElement
-                                key={currentCol.data}
-                                title={currentCol.title} data={currentCol.data}
+                                key={currentCol.label}
+                                title={currentCol.title} data={currentCol.label}
                                 currentSorting={currentSorting} setCurrentSorting={setCurrentSorting}
                             />
                         ))}
@@ -244,7 +244,7 @@ function CustomTable({data, columns}) {
                         :
                         subData.map(currentData => (
                         <DataRow columns={columns} subData={currentData}
-                                 key={`${currentData[firstColLabel]} ${currentData[columns[1].data]}`}/>
+                                 key={`${currentData[firstColLabel]} ${currentData[columns[1].label]}`}/>
                     ))}
                     </tbody>
                 </table>
