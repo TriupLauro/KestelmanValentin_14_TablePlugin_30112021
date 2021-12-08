@@ -1,4 +1,5 @@
 import React from "react";
+import {anyKeyOfStringOrNumber, columnsLabelsItem} from "../data/data";
 
 /**
  * Component displaying a data object as a row
@@ -10,7 +11,7 @@ import React from "react";
  * @returns {JSX.Element} The row of the table
  * @constructor
  */
-function DataRow({columns,subData}) {
+function DataRow({columns,subData} : {columns : columnsLabelsItem[], subData : anyKeyOfStringOrNumber}) {
     return(
         <tr>
             {columns.map((currentCol) => (

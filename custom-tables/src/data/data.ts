@@ -23,7 +23,7 @@ export const columnsLabels: columnsLabelsItem[] = [
     { title: 'Zip Code', label: 'zipCode' }
 ]
 
-export interface updateLater {
+export interface anyKeyOfStringOrNumber {
     [key : string] : string | number
 }
 
@@ -32,7 +32,7 @@ export interface updateLater {
  * Each key should be referenced as the data value of one column element (see columnsLabel)
  * @type Object[]
  */
-export const contentData : updateLater[] = [
+export const contentData : anyKeyOfStringOrNumber[] = [
     {
         firstName : "Marisa",
         lastName : "Kirisame",
@@ -84,7 +84,7 @@ repeat(50,{
   "zipCode" : random(10000,99999)
 })
  */
-export const generatedData : updateLater[] = [
+export const generatedData : anyKeyOfStringOrNumber[] = [
     {
         "firstName": "Roberta",
         "lastName": "Sasnett",

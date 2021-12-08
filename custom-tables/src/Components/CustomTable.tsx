@@ -1,7 +1,9 @@
-import React, {useMemo, useState} from "react";
+import React, {ChangeEvent, useMemo, useState} from "react";
 import "../Styles/CustomTable.css"
 import HeaderElement from "./HeaderElement";
 import DataRow from "./DataRow";
+import {anyKeyOfStringOrNumber, columnsLabelsItem} from "../data/data";
+import {isValid as isValidDate} from 'date-fns'
 
 /**
  * The table to display the data.
@@ -16,7 +18,7 @@ import DataRow from "./DataRow";
  * @returns {JSX.Element} The table of data, or a message if no data is given
  * @constructor
  */
-function CustomTable({data, columns}) {
+function CustomTable({data, columns} : {data : anyKeyOfStringOrNumber[], columns : columnsLabelsItem[]}) {
 
     const [entriesDisplayed, setEntriesDisplayed] = useState(5)
     const [currentPage, setCurrentPage] = useState(1)
@@ -26,8 +28,8 @@ function CustomTable({data, columns}) {
      * Should be called on the onChange of the select dropdown
      * @param e The synthetic event
      */
-    function onSelectEntriesDisplayed(e) {
-        setEntriesDisplayed(e.target.value)
+    function onSelectEntriesDisplayed(e : ChangeEvent<HTMLSelectElement>) {
+        setEntriesDisplayed(parseInt(e.target.value))
         setCurrentPage(1)
     }
 
@@ -38,7 +40,7 @@ function CustomTable({data, columns}) {
      * Should be called on the onChange of the text input
      * @param e The synthetic event
      */
-    function onChangeSearch(e) {
+    function onChangeSearch(e : ChangeEvent<HTMLInputElement>) {
         setSearchKeyword(e.target.value)
         setCurrentPage(1)
     }
@@ -52,7 +54,7 @@ function CustomTable({data, columns}) {
      * @param {string} columnsArray[].data The key of the data object
      * @returns {Object[]} The filtered array
      */
-    function filterData(data,keyword,columnsArray) {
+    function filterData(data : anyKeyOfStringOrNumber[],keyword : string,columnsArray : columnsLabelsItem[]) {
         return data.filter(row => {
             for (let currentColumn of columnsArray) {
                 if (row[currentColumn.label].toString().toLowerCase().includes(keyword.toLowerCase())) return true
@@ -79,8 +81,8 @@ function CustomTable({data, columns}) {
      * @param subData The variable to analyse
      * @returns {string} The type of the variable
      */
-    function typeOfData(subData) {
-        if (isFinite(new Date(subData))) return 'date'
+    function typeOfData(subData : any) {
+        if (isValidDate(new Date(subData))) return 'date'
 
         if (isNaN((subData))) return 'text'
 
@@ -105,12 +107,12 @@ function CustomTable({data, columns}) {
      * @param {'asc'|'desc'} direction The direction of the sort
      * @returns {Object[]} The sorted array of data
      */
-    function sortData(dataset, sortingColumn, direction) {
+    function sortData(dataset : any, sortingColumn : string, direction : string) {
         if (dataset.length === 0) return []
 
         const sortType = typeOfData(dataset[0][sortingColumn])
 
-        dataset.sort((a,b) => {
+        dataset.sort((a : any,b : any) => {
             if (sortType === 'number') {
                 if (direction === 'asc') {
                     return parseInt(a[sortingColumn]) - parseInt(b[sortingColumn])
@@ -242,7 +244,7 @@ function CustomTable({data, columns}) {
                     {subData.length === 0 ?
                         <tr><td colSpan={columns.length} className="empty-table">No data available</td></tr>
                         :
-                        subData.map(currentData => (
+                        subData.map((currentData : anyKeyOfStringOrNumber) => (
                         <DataRow columns={columns} subData={currentData}
                                  key={`${currentData[firstColLabel]} ${currentData[columns[1].label]}`}/>
                     ))}
