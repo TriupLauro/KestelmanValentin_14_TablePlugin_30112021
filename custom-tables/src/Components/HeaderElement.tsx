@@ -2,6 +2,13 @@ import React from "react";
 import "../Styles/HeaderElement.css"
 import {FaSort, FaSortDown, FaSortUp} from "react-icons/fa";
 
+interface HeaderElementProps {
+    title : string
+    data : string
+    currentSorting : string
+    setCurrentSorting : Function
+}
+
 /**
  * Component used as a header element for the table
  * Clicking on each element triggers a sorting of the table
@@ -13,7 +20,7 @@ import {FaSort, FaSortDown, FaSortUp} from "react-icons/fa";
  * @returns {JSX.Element} The header with the adequate fontAwesome Icon illustrating the type of sorting
  * @constructor
  */
-function HeaderElement({title, data, currentSorting,setCurrentSorting}) {
+function HeaderElement({title, data, currentSorting,setCurrentSorting} : HeaderElementProps) {
 
     if (currentSorting === `${data} asc`) {
         return (
