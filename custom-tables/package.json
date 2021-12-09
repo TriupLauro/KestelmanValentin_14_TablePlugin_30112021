@@ -1,5 +1,5 @@
 {
-  "name": "custom-tables",
+  "name": "vk-custom-tables",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -9,8 +9,6 @@
   },
   "dependencies": {
     "date-fns": "^2.27.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
     "react-icons": "^4.3.1"
   },
   "devDependencies": {
@@ -22,6 +20,10 @@
     "vite": "^2.6.4",
     "vite-tsconfig-paths": "^3.3.17"
   },
-  "main" : "dist/main.js",
-  "types" : "dist/main.d.ts"
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "main": "dist/Components/CustomTable.js",
+  "types": "dist/Components/CustomTable.d.ts"
 }
