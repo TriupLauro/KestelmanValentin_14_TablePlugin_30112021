@@ -1,6 +1,6 @@
 {
   "name": "vk-custom-tables",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -25,5 +25,9 @@
     "react-dom": "^17.0.0"
   },
   "main": "dist/index.js",
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TriupLauro/KestelmanValentin_14_TablePlugin_30112021/tree/migrate_to_TS"
+  }
 }
