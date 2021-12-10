@@ -65,3 +65,7 @@
     border-right: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
 }
+
+.header-element .fa-sort {
+    color : grey;
+}

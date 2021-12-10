@@ -26,6 +26,7 @@ or with yarn :
 
 ```jsx
 import {CustomTable} from "vk-custom-tables"
+import "vk-custom-tables/dist/Styles/CustomTable.css" 
 
 function YourComponent () {
     //your code
@@ -36,6 +37,8 @@ function YourComponent () {
     )
 }
 ```
+
+You need to import both the component itself and the stylesheet.
 
 ## Format of data
 

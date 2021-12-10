@@ -1,5 +1,4 @@
 import React from "react";
-import "../Styles/HeaderElement.css"
 import {FaSort, FaSortDown, FaSortUp} from "react-icons/fa";
 
 interface HeaderElementProps {

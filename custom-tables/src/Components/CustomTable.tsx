@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useMemo, useState} from "react";
-import "../Styles/CustomTable.css"
 import HeaderElement from "./HeaderElement";
 import DataRow from "./DataRow";
 import {anyKeyOfStringOrNumber, columnsLabelsItem} from "../data/data";
