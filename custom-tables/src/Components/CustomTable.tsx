@@ -9,10 +9,9 @@ import {isValid as isValidDate} from 'date-fns'
  * Given the two props described below, makes a table
  * with sort, filter and pagination functionalities.
  * @component
- * @param {Object[]} columns The columns props, specify the header and the key of the data
- * @param {String} columns.title The title of the column to be displayed in the header
- * @param {String} columns.label The key of the data in the data object corresponding to the title
- * @param {Object[]} data The data to be displayed. The key of each object must correspond to the value of label
+ * @param {Object[]} props The props of the component : columns and data
+ * @param {Object[]} props.columns The columns prop. Must be an array with each element having a label and title value
+ * @param {Object[]} props.data The data to be displayed. The key of each object must correspond to the value of label
  * in the columns prop
  * @returns {JSX.Element} The table of data, or a message if no data is given
  * @constructor

@@ -1,3 +1,4 @@
 import CustomTable from "./Components/CustomTable";
+import {columnsLabelsItem, anyKeyOfStringOrNumber} from "./data/data";
 
-export {CustomTable}
+export {CustomTable, columnsLabelsItem, anyKeyOfStringOrNumber}
