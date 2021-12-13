@@ -106,6 +106,23 @@ And that's it, you should have your data displayed in a table.
 
 ![The resulting table with the above data](readme-files/smExampleTable.png)
 
+## Importing the data types
+
+If your project is in TypeScript, you can import and use the types for the two 
+CustomTable props :
+
+```js
+import {CustomTable, columnsLabelsItem, anyKeyOfStringOrNumber} from "vk-custom-tables";
+
+const columnsLabel : columnsLabelsItem[] = {
+    //...
+}
+
+const contentData : anyKeyOfStringOrNumber[] = {
+    //...
+}
+```
+
 ## Side notes
 
 As long as your data is consistent across all element, same format for each date, no missing data, 

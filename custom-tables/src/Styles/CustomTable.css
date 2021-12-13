@@ -69,7 +69,3 @@
 .header-element .fa-sort {
     color : grey;
 }
-
-button {
-    font-size: calc(10px + 2vmin);
-}
