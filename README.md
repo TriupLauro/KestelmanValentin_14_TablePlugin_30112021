@@ -112,13 +112,13 @@ If your project is in TypeScript, you can import and use the types for the two
 CustomTable props :
 
 ```js
-import {CustomTable, columnsLabelsItem, anyKeyOfStringOrNumber} from "vk-custom-tables";
+import {CustomTable, ColumnsLabelItem, DataDefaultType} from "vk-custom-tables";
 
-const columnsLabel : columnsLabelsItem[] = {
+const columnsLabel : ColumnsLabelItem[] = {
     //...
 }
 
-const contentData : anyKeyOfStringOrNumber[] = {
+const contentData : DataDefaultType[] = {
     //...
 }
 ```

@@ -1,1 +1,5 @@
 src/
+example/
+vite.config.js
+package.json
+tsconfig.json

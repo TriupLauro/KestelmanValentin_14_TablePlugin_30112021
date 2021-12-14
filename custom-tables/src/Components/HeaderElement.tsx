@@ -3,7 +3,7 @@ import {FaSort, FaSortDown, FaSortUp} from "react-icons/fa";
 
 interface HeaderElementProps {
     title : string
-    data : string
+    label : string
     currentSorting : string
     setCurrentSorting : Function
 }
@@ -12,28 +12,29 @@ interface HeaderElementProps {
  * Component used as a header element for the table
  * Clicking on each element triggers a sorting of the table
  * Sorting can be "asc" or "desc"
- * @param {string} title The text content of the header
- * @param {string} data The key corresponding to the data being displayed/sorted by this header element
- * @param {string} currentSorting The state of the table corresponding to the type of sorting (ex : 'firstName asc')
- * @param {function} setCurrentSorting The function used to change the currentSorting state
+ * @param {Object} props The props of the component
+ * @param {string} props.title The text content of the header
+ * @param {string} props.label The key corresponding to the data label being displayed/sorted by this header element
+ * @param {string} props.currentSorting The state of the table corresponding to the type of sorting (ex : 'firstName asc')
+ * @param {function} props.setCurrentSorting The function used to change the currentSorting state
  * @returns {JSX.Element} The header with the adequate fontAwesome Icon illustrating the type of sorting
  * @constructor
  */
-function HeaderElement({title, data, currentSorting,setCurrentSorting} : HeaderElementProps) {
+function HeaderElement({title, label, currentSorting,setCurrentSorting} : HeaderElementProps) {
 
-    if (currentSorting === `${data} asc`) {
+    if (currentSorting === `${label} asc`) {
         return (
             <th className="header-element"
-                onClick={() => setCurrentSorting(`${data} desc`)}>
+                onClick={() => setCurrentSorting(`${label} desc`)}>
                 {title} <FaSortUp />
             </th>
         )
     }
 
-    if (currentSorting === `${data} desc`) {
+    if (currentSorting === `${label} desc`) {
         return (
             <th className="header-element"
-                onClick={() => setCurrentSorting(`${data} asc`)}>
+                onClick={() => setCurrentSorting(`${label} asc`)}>
                 {title} <FaSortDown />
             </th>
         )
@@ -41,7 +42,7 @@ function HeaderElement({title, data, currentSorting,setCurrentSorting} : HeaderE
 
     return (
         <th className="header-element"
-            onClick={() => setCurrentSorting(`${data} asc`)}>
+            onClick={() => setCurrentSorting(`${label} asc`)}>
             {title} <FaSort className="fa-sort"/>
         </th>
     )

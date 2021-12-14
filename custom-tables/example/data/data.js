@@ -1,8 +1,3 @@
-export interface columnsLabelsItem {
-    title : string
-    label : string
-}
-
 /**
  * How the columns array should be formatted
  * The title value can be anything and is only used as the name of the header
@@ -11,10 +6,11 @@ export interface columnsLabelsItem {
  * the keys of every data element
  * @type {{label: string, title: string}[]}
  */
-export const columnsLabels: columnsLabelsItem[] = [
+
+export const columnsLabels = [
     { title: 'First Name', label: 'firstName' },
     { title: 'Last Name', label: 'lastName' },
-    { title: 'Start Date', label: 'startDate' },
+    { title: 'Start Date', label: 'startDate'},
     { title: 'Department', label: 'department' },
     { title: 'Date of Birth', label: 'dateOfBirth' },
     { title: 'Street', label: 'street' },
@@ -23,16 +19,7 @@ export const columnsLabels: columnsLabelsItem[] = [
     { title: 'Zip Code', label: 'zipCode' }
 ]
 
-export interface anyKeyOfStringOrNumber {
-    [key : string] : string | number
-}
-
-/**
- * The data to be displayed in the table. Every element should have the same keys.
- * Each key should be referenced as the data value of one column element (see columnsLabel)
- * @type Object[]
- */
-export const contentData : anyKeyOfStringOrNumber[] = [
+export const contentData = [
     {
         firstName : "Marisa",
         lastName : "Kirisame",
@@ -84,7 +71,7 @@ repeat(50,{
   "zipCode" : random(10000,99999)
 })
  */
-export const generatedData : anyKeyOfStringOrNumber[] = [
+export const generatedData = [
     {
         "firstName": "Roberta",
         "lastName": "Sasnett",

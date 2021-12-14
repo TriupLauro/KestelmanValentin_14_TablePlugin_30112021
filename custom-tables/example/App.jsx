@@ -1,4 +1,4 @@
-import CustomTable from "./Components/CustomTable";
+import CustomTable from "../src/Components/CustomTable";
 import {columnsLabels, contentData, generatedData} from "./data/data";
 import {bigColumns, bigRandomNumber} from "./data/bigData";
 import React from "react";

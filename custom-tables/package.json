@@ -1,11 +1,11 @@
 {
   "name": "vk-custom-tables",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "prepare": "tsc"
+    "prepare": "rd dist /s /q && tsc && copyfiles --flat src/Styles/CustomTable.css dist/Styles"
   },
   "dependencies": {
     "date-fns": "^2.27.0",

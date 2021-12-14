@@ -1,8 +1,16 @@
 import React, {ChangeEvent, useMemo, useState} from "react";
 import HeaderElement from "./HeaderElement";
 import DataRow from "./DataRow";
-import {anyKeyOfStringOrNumber, columnsLabelsItem} from "../data/data";
 import {isValid as isValidDate} from 'date-fns'
+
+export interface DataDefaultType {
+    [key : string] : string | number
+}
+
+export interface ColumnsLabelItem {
+    title : string
+    label : string
+}
 
 /**
  * The table to display the data.
@@ -16,7 +24,7 @@ import {isValid as isValidDate} from 'date-fns'
  * @returns {JSX.Element} The table of data, or a message if no data is given
  * @constructor
  */
-function CustomTable({data, columns} : {data : anyKeyOfStringOrNumber[], columns : columnsLabelsItem[]}) {
+function CustomTable({data, columns} : {data : DataDefaultType[], columns : ColumnsLabelItem[]}) {
 
     const [entriesDisplayed, setEntriesDisplayed] = useState(5)
     const [currentPage, setCurrentPage] = useState(1)
@@ -52,7 +60,7 @@ function CustomTable({data, columns} : {data : anyKeyOfStringOrNumber[], columns
      * @param {string} columnsArray[].data The key of the data object
      * @returns {Object[]} The filtered array
      */
-    function filterData(data : anyKeyOfStringOrNumber[],keyword : string,columnsArray : columnsLabelsItem[]) {
+    function filterData(data : DataDefaultType[],keyword : string,columnsArray : ColumnsLabelItem[]) {
         return data.filter(row => {
             for (let currentColumn of columnsArray) {
                 if (row[currentColumn.label].toString().toLowerCase().includes(keyword.toLowerCase())) return true
@@ -231,7 +239,7 @@ function CustomTable({data, columns} : {data : anyKeyOfStringOrNumber[], columns
                         {columns.map(currentCol => (
                             <HeaderElement
                                 key={currentCol.label}
-                                title={currentCol.title} data={currentCol.label}
+                                title={currentCol.title} label={currentCol.label}
                                 currentSorting={currentSorting} setCurrentSorting={setCurrentSorting}
                             />
                         ))}
@@ -242,7 +250,7 @@ function CustomTable({data, columns} : {data : anyKeyOfStringOrNumber[], columns
                     {subData.length === 0 ?
                         <tr><td colSpan={columns.length} className="empty-table">No data available</td></tr>
                         :
-                        subData.map((currentData : anyKeyOfStringOrNumber) => (
+                        subData.map((currentData : DataDefaultType) => (
                         <DataRow columns={columns} subData={currentData}
                                  key={`${currentData[firstColLabel]} ${currentData[columns[1].label]}`}/>
                     ))}

@@ -1,12 +1,10 @@
-import {anyKeyOfStringOrNumber, columnsLabelsItem} from "./data";
-
-export const bigColumns : columnsLabelsItem[] = [
+export const bigColumns = [
     {title : "First Name", label : "firstName"},
     {title: "Last Name", label : "lastName"},
     {title : "Number", label : "number"}
 ]
 
-export const bigRandomNumber : anyKeyOfStringOrNumber[] = [
+export const bigRandomNumber = [
     {
         "firstName": "Adelle",
         "lastName": "Janene",
