@@ -2,8 +2,6 @@
 
 A npm package to easily create sortable and searchable data tables as a React component.
 
-![An example of a resulting table](readme-files/tableExample.png)
-
 ## Prerequisite
 
 To use it you need to have installed React and React-dom.
@@ -103,8 +101,6 @@ The value of each object in the data array should either be a string or a number
 A string parseable as a date is also valid, and will be sorted accordingly.
 
 And that's it, you should have your data displayed in a table.
-
-![The resulting table with the above data](readme-files/smExampleTable.png)
 
 ## Importing the data types
 
