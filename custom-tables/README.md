@@ -1,7 +1,6 @@
 # Custom Tables
 
 A npm package to easily create sortable and searchable data tables as a React component.
-[View on npm](https://www.npmjs.com/package/vk-custom-tables)
 
 ## Prerequisite
 
